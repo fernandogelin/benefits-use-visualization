@@ -1,86 +1,33 @@
 /* Legend Font Style */
 @import url("https://use.typekit.net/xzf6qrz.css")
 
-body
-	font: 11px sans-serif
-	background-color: #B0E2FF
-
-/* Legend Position Style */
-.legend
-	position: absolute
-	left: 20px
-	top: 30px
-
-.axis text
-	font: 10px sans-serif
-
-.axis line, .axis path
-	fill: none
-	stroke: #000
-	shape-rendering: crispEdges
-
-.dropdown
-	width: 50%
-	height: 40px
-	margin-left: 25%
-
-.center-col
-	margin-top: -4rem
-	z-index: 200
-  height: 80%
-	padding: 1.5rem
-
-.plots
-	margin-top: 3rem
-	width: 120%
-
-.start-window
-	margin-top: 5rem
-	background-color: #f0f0f0
-	h1
-		text-align: center
-		font-weight: bold
-		text-decoration: underline
-		text-decoration-color: #007bff
-
-.map-container
-	margin-top: 4rem
-	margin-left: 2rem
-  z-index: -1
-  background-color: "blue"
-
-#map-right
-	margin-left: 0rem
-
-.race-plot
-	margin-left: 2rem
-
-.stats-table
-	font-family: $heading-font-family
-	font-weight: bold
-
-.town-heading
-	margin-top: -3rem
-	margin-left: 2.2rem
-	width: 120%
-	p
-		margin-bottom: 0.2rem
-		font-size: 0.7rem
-
-.variable
-	font-family: "ardoise-std", sans-serif
-	font-size: 0.9rem
-
-.demographics-title
+.title
 	text-align: center
-	margin-top: -2rem
+	padding-top: 3rem
+	padding-bottom: 6rem
 
-.scatterplot, .stats-table
-	visibility: hidden
-	margin-left: 1rem
+#sections
+	margin-left: 10rem
+	padding-right: 50rem
+  position: relative
+  display: inline-block
+  width: 50%
+  top: 0px
+  z-index: 90
 
-.text-label
-	+type-scale(3)
+.step
+  margin-bottom: 200px
 
-text
-	font-family: "ardoise-std",sans-serif
+#vis
+  display: inline-block
+  position: fixed
+  top: 25%
+  z-index: 1
+  margin-left: 50%
+
+  height: 600px
+  width: 600px
+
+.st0, .st1, .st2
+	fill: white
+	stroke: black

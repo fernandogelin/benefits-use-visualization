@@ -19,8 +19,7 @@
   "dependencies": {
     "d3": "4.x",
     "express": "^4.13.3",
-    "topojson": "^3.0.2",
-    "topojson-client": "^3.0.0",
+    "node-sass": "^4.7.2",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.1.0",
     "gulp-sass": "^3.1.0"
