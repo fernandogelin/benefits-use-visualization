@@ -25,9 +25,11 @@ function scrollVis() {
     activateFunctions[1] = showPeople;
     activateFunctions[2] = show36;
     activateFunctions[3] = who;
-    activateFunctions[4] = show23;
-    activateFunctions[5] = show23;
+    activateFunctions[4] = zoom;
+    activateFunctions[5] = benefitHousehold;
     activateFunctions[6] = show23;
+    activateFunctions[7] = show23;
+    activateFunctions[8] = donut;
 
   };
 
@@ -38,25 +40,130 @@ function scrollVis() {
   function showPeople() {
     d3.selectAll("path")
       .transition()
+      .duration(function() {
+        return Math.random() * 1000 ;
+      })
       .style("opacity", 1)
-      .style("fill", "white")
+      .style("fill", "#d3d3d3")
   };
 
   function show36() {
     d3.selectAll('.st0,.st1')
       .transition()
-      .style("fill", "blue")
+      .duration(function() {
+        return Math.random() * 1000 ;
+      })
+      .style('fill', 'blue')
+      .style('opacity', 1)
+      .attr('transform', 'scale(1)')
+
+    d3.selectAll('.st2')
+      .transition()
+      .style('opacity', 1)
+      .attr('transform', 'scale(1)')
+      .style('fill', '#d3d3d3')
+
+    d3.selectAll('.group0').selectAll('.st0')
+      .transition()
+      .style('opacity', 1)
+      .style('fill', 'blue')
+      .attr('transform', 'scale(1)')
   };
 
   function who() {
-    d3.select('.st0')
+    d3.selectAll('.st0,.st1,.st2')
+      .transition()
+      .style('opacity', 0)
+
+    d3.selectAll('.group0').selectAll('.st0')
+      .transition()
+      .duration(1500)
+      .style('opacity', 1)
+      .attr('transform', 'scale(11)')
+      .style('fill', 'blue')
+
+  }
+
+  function zoom() {
+   d3.selectAll('.st0,.st1,.st2')
+     .attr('transform','scale(-100)')
+
+   d3.selectAll('.group0').selectAll('.st0')
+     .transition()
+     .duration(1500)
+     .attr('transform', 'scale(1000)')
+  }
+
+  function benefitHousehold() {
+    d3.selectAll('.st0,.st1,.st2')
+      .transition()
+      .duration(function() {
+        return Math.random() * 1000 ;
+      })
+      .style('opacity', 1)
+      .style('fill', 'blue')
+      .attr('transform', 'scale(1)')
   }
 
   function show23() {
-    d3.selectAll('.st1')
+    d3.select("#household-icons").selectAll('g')
       .transition()
-      .style("fill", "white")
+      .style('opacity', 1)
+
+    d3.selectAll('.st1,.st2')
+      .transition()
+      .style('fill', 'blue')
+      .style('opacity', 1)
+
+    d3.selectAll('.st0')
+      .transition()
+      .style('fill', 'navy')
+      .style('opacity', 1)
+
+    d3.selectAll('.group0').selectAll('.st0')
+      .transition()
+      .style('opacity', 1)
+      .attr('transform', 'scale(1,1)')
+      .style('fill', 'navy')
+
+    d3.select(".donut")
+      .transition()
+      .duration(1500)
+      .attr('transform', 'translate(0,1000)')
+
+    d3.select(".donut").remove()
   };
+
+  function donut() {
+    d3.selectAll("path")
+      .transition()
+      .style("opacity", 1)
+
+   d3.select("#household-icons").selectAll('g')
+     .style('opacity', 0)
+
+    const donutData = [{"group": "Single adult", "proportion": 0.411},
+                       {"group": "Single retiree", "proportion": 0.196},
+                       {"group": "Single parent, 1 child", "proportion": 0.091},
+                       {"group": "Single parent, 2 children", "proportion": 0.068},
+                       {"group": "Other", "proportion": 0.234}
+                      ]
+
+    var donut = donutChart()
+      .width(960)
+      .height(500)
+      .transTime(750) // length of transitions in ms
+      .cornerRadius(3) // sets how rounded the corners are on each slice
+      .padAngle(0.015) // effectively dictates the gap between slices
+      .variable('proportion')
+      .category('group');
+
+    d3.select("#vis").call(donut.data(donutData))
+    d3.select(".donut").attr('transform', 'translate(0,1000)')
+      .transition()
+      .duration(1200)
+      .attr('transform', 'translate(0,-500)')
+  }
 
   chart.activate = function (index) {
     activeIndex = index;
