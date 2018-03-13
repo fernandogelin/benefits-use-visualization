@@ -1,6 +1,6 @@
 # Benefits Use Data Story
 
-[![Travis](https://travis-ci.org/riipl-org/benefits-use.svg?branch=master)](https://travis-ci.org/riipl-org/benefits-use)
+[![Travis](https://travis-ci.org/riipl-org/benefits-use-visualization.svg?branch=master)](https://travis-ci.org/riipl-org/benefits-use-visualization)
 
 ## Requirements
 
