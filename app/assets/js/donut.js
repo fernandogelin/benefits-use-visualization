@@ -64,6 +64,7 @@ function donutChart() {
                 .data(pie(data))
               .enter().append('path')
                 .attr('fill', function(d) { return colour(d.data[category]); })
+                .attr('class', function(d) { return d.data[category].split(",")[0]; })
                 .attr('d', arc);
             // ===========================================================================================
 

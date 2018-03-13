@@ -30,6 +30,7 @@ function scrollVis() {
     activateFunctions[6] = show23;
     activateFunctions[7] = show23;
     activateFunctions[8] = donut;
+    activateFunctions[9] = retirees;
 
   };
 
@@ -163,6 +164,24 @@ function scrollVis() {
       .transition()
       .duration(1200)
       .attr('transform', 'translate(0,-500)')
+
+   d3.selectAll('.slices').selectAll('path')
+     .style('opacity', 0.2)
+
+   d3.select('.Single.adult')
+     .transition()
+     .delay(1400)
+     .style('opacity', 1)
+  }
+
+  function retirees() {
+    d3.selectAll('.slices').selectAll('path')
+      .transition()
+      .style('opacity', 0.2)
+
+    d3.select('.Single.retiree')
+      .transition()
+      .style('opacity', 1)
   }
 
   chart.activate = function (index) {
