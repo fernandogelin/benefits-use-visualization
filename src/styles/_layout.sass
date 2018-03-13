@@ -15,19 +15,21 @@
   top: 0px
   z-index: 90
 
-
 .step
   margin-bottom: 500px
 
-#vis
+.short
+		margin-bottom: 300px
+
+#vis, #icons
   display: inline-block
   position: fixed
   top: 25%
   z-index: 1
   margin-left: 50%
 
-  height: 600px
-  width: 600px
+  height: 700px
+  width: 700px
 
 .st0, .st1, .st2
 	fill: white
@@ -46,7 +48,6 @@ polyline
   fill: none
   shape-rendering: geometricPrecision
 
-
 /* styling for the donut slices*/
 path
   shape-rendering: geometricPrecision
@@ -61,3 +62,8 @@ path
 .labelName
   font-size: 0.8em
   font-style: italic
+
+.icon-label
+	font-family: $heading-font-family
+	+type-scale(6)
+	fill: $medium-gray

@@ -31,6 +31,10 @@ function scrollVis() {
     activateFunctions[7] = show23;
     activateFunctions[8] = donut;
     activateFunctions[9] = retirees;
+    activateFunctions[10] = disabled;
+    activateFunctions[11] = disabledTransition;
+    activateFunctions[12] = medicalExpenses;
+    activateFunctions[13] = hospitalTransition;
 
   };
 
@@ -107,38 +111,39 @@ function scrollVis() {
   }
 
   function show23() {
+    d3.select(".donut").remove();
+
     d3.select("#household-icons").selectAll('g')
       .transition()
-      .style('opacity', 1)
+      .style('opacity', 1);
 
     d3.selectAll('.st1,.st2')
       .transition()
       .style('fill', 'blue')
-      .style('opacity', 1)
+      .style('opacity', 1);
 
     d3.selectAll('.st0')
       .transition()
       .style('fill', 'navy')
-      .style('opacity', 1)
+      .style('opacity', 1);
 
     d3.selectAll('.group0').selectAll('.st0')
       .transition()
       .style('opacity', 1)
       .attr('transform', 'scale(1,1)')
-      .style('fill', 'navy')
+      .style('fill', 'navy');
 
     d3.select(".donut")
       .transition()
       .duration(1500)
-      .attr('transform', 'translate(0,1000)')
+      .attr('transform', 'translate(0,1000)');
 
-    d3.select(".donut").remove()
   };
 
   function donut() {
     d3.selectAll("path")
       .transition()
-      .style("opacity", 1)
+      .style("opacity", 0.2)
 
    d3.select("#household-icons").selectAll('g')
      .style('opacity', 0)
@@ -175,6 +180,12 @@ function scrollVis() {
   }
 
   function retirees() {
+    var iconsDiv = d3.selectAll("#icons");
+    iconsDiv.select('svg').remove();
+
+    d3.selectAll("#vis")
+      .style('visibility', 'visible')
+
     d3.selectAll('.slices').selectAll('path')
       .transition()
       .style('opacity', 0.2)
@@ -183,6 +194,87 @@ function scrollVis() {
       .transition()
       .style('opacity', 1)
   }
+
+  function prepareIcons() {
+    var svg = d3.select('svg')
+                .attr('width', 600);
+    d3.select('.g-icon')
+      .attr('transform', 'translate(30,1000)')
+      .transition()
+      .duration(2000)
+      .attr('transform', 'translate(30,100)')
+
+    d3.selectAll('.icon')
+      .attr('transform', 'scale(0.45)')
+      .style('fill', '#fff')
+    d3.selectAll('.icon.right').selectAll('g')
+      .attr('transform', 'translate(450,0)')
+    d3.selectAll('.icon-path')
+      .attr('stroke-width', '4')
+      .attr('stroke', '#d3d3d3')
+  }
+
+  function disabled() {
+    d3.selectAll("#vis")
+      .style('visibility', 'hidden');
+
+    d3.select("#icons").select('svg').remove();
+
+    d3.xml("assets/svg/accessible-icon.svg").mimeType("image/svg+xml").get(function(error, xml) {
+      if (error) throw error;
+      const importedNode = document.importNode(xml.documentElement, true);
+      d3.select("#icons").each(function() {
+        this.appendChild(importedNode);
+      prepareIcons();
+      });
+    })
+  }
+
+  function disabledTransition() {
+    d3.select('.g-clip-left')
+      .transition()
+      .duration(1500)
+      .attr("height", 512*(1-0.432));
+
+    d3.select('.g-clip-right')
+      .transition()
+      .duration(1500)
+      .attr("height", 512*(1-0.054));
+  }
+
+  function medicalExpenses() {
+    d3.select('.g-icon')
+      .transition()
+      .duration(2000)
+      .attr('transform', 'translate(30,-100)')
+
+    d3.selectAll("#vis")
+      .style('visibility', 'hidden');
+
+    d3.select("#icons").select('svg').remove();
+
+    d3.xml("assets/svg/hospital-icon.svg").mimeType("image/svg+xml").get(function(error, xml) {
+      if (error) throw error;
+      const importedNode = document.importNode(xml.documentElement, true);
+      d3.select("#icons").each(function() {
+        this.appendChild(importedNode);
+      prepareIcons();
+      });
+    })
+  }
+
+  function hospitalTransition() {
+    d3.select('.g-clip-left')
+      .transition()
+      .duration(1500)
+      .attr("height", 512*(1-1000/1000));
+
+    d3.select('.g-clip-right')
+      .transition()
+      .duration(1500)
+      .attr("height", 512*(1-244/1000));
+  }
+
 
   chart.activate = function (index) {
     activeIndex = index;
