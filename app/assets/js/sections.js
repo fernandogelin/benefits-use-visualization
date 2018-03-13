@@ -171,9 +171,9 @@ function scrollVis() {
       .attr('transform', 'translate(0,-500)')
 
    d3.selectAll('.slices').selectAll('path')
-     .style('opacity', 0.2)
+     .style('opacity', 0.1)
 
-   d3.select('.Single.adult')
+   d3.selectAll('.adult,.retiree')
      .transition()
      .delay(1400)
      .style('opacity', 1)
