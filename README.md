@@ -1,6 +1,7 @@
 # Benefits Use Data Story
 
 [![Travis](https://travis-ci.org/riipl-org/benefits-use-visualization.svg?branch=master)](https://travis-ci.org/riipl-org/benefits-use-visualization)
+[![Maintainability](https://api.codeclimate.com/v1/badges/987d9c4d097f9d11cf18/maintainability)](https://codeclimate.com/github/riipl-org/benefits-use-visualization/maintainability)
 
 ## Requirements
 

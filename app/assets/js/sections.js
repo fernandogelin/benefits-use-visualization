@@ -267,6 +267,8 @@ function scrollVis() {
   }
 
   function hospitalTransition() {
+    d3.select("#plots").select('svg').remove();
+
     d3.select('.g-clip-left')
       .transition()
       .duration(1500)
