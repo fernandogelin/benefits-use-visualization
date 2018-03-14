@@ -35,6 +35,8 @@ function scrollVis() {
     activateFunctions[11] = disabledTransition;
     activateFunctions[12] = medicalExpenses;
     activateFunctions[13] = hospitalTransition;
+    activateFunctions[14] = shareNetBenefits;
+    activateFunctions[15] = shareNetBenefitsTransition;
 
   };
 
@@ -148,7 +150,8 @@ function scrollVis() {
    d3.select("#household-icons").selectAll('g')
      .style('opacity', 0)
 
-    const donutData = [{"group": "Single adult", "proportion": 0.411},
+    const donutData = [
+                       {"group": "Single adult", "proportion": 0.411},
                        {"group": "Single retiree", "proportion": 0.196},
                        {"group": "Single parent, 1 child", "proportion": 0.091},
                        {"group": "Single parent, 2 children", "proportion": 0.068},
@@ -165,10 +168,10 @@ function scrollVis() {
       .category('group');
 
     d3.select("#vis").call(donut.data(donutData))
-    d3.select(".donut").attr('transform', 'translate(0,1000)')
+    d3.select(".donut").attr('transform', 'translate(-100,1000)')
       .transition()
       .duration(1200)
-      .attr('transform', 'translate(0,-500)')
+      .attr('transform', 'translate(-100,-600)')
 
    d3.selectAll('.slices').selectAll('path')
      .style('opacity', 0.1)
@@ -202,7 +205,7 @@ function scrollVis() {
       .attr('transform', 'translate(30,1000)')
       .transition()
       .duration(2000)
-      .attr('transform', 'translate(30,100)')
+      .attr('transform', 'translate(30,0)')
 
     d3.selectAll('.icon')
       .attr('transform', 'scale(0.45)')
@@ -246,7 +249,7 @@ function scrollVis() {
     d3.select('.g-icon')
       .transition()
       .duration(2000)
-      .attr('transform', 'translate(30,-100)')
+      .attr('transform', 'translate(30,-200)')
 
     d3.selectAll("#vis")
       .style('visibility', 'hidden');
@@ -273,6 +276,41 @@ function scrollVis() {
       .transition()
       .duration(1500)
       .attr("height", 512*(1-244/1000));
+  }
+
+  function shareNetBenefits() {
+    d3.select("#icons").remove();
+    d3.select("#plots").select('svg').remove();
+
+    d3.xml("assets/svg/net_share_households_on_benefits.svg").mimeType("image/svg+xml").get(function(error, xml) {
+      if (error) throw error;
+      const importedNode = document.importNode(xml.documentElement, true);
+      d3.select("#plots").each(function() {
+        this.appendChild(importedNode);
+      });
+
+      d3.selectAll('rect')
+        .style('opacity', 0)
+
+      d3.select('#plots').select('svg')
+        .attr('transform', 'translate(0,1000)')
+        .transition()
+        .duration(2000)
+        .attr('transform', 'translate(0,-100)')
+
+    })
+  }
+
+  function shareNetBenefitsTransition() {
+    d3.select('#plots').select('svg')
+      .selectAll('rect')
+      .transition()
+      .duration(1400)
+      .ease(d3.easeBounce)
+      .style('opacity', 1)
+      .attrTween('height', function() {
+        return d3.interpolateNumber(0, this.getAttribute("height"))
+      })
   }
 
 
