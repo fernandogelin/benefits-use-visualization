@@ -35,7 +35,7 @@ function scrollVis() {
     activateFunctions[11] = disabledTransition;
     activateFunctions[12] = medicalExpenses;
     activateFunctions[13] = hospitalTransition;
-    activateFunctions[14] = shareNetBenefits;
+    activateFunctions[14] = shareNetBenefits("assets/svg/net_share_households_on_benefits.svg");
     activateFunctions[15] = shareNetBenefitsTransition;
 
   };
@@ -280,11 +280,11 @@ function scrollVis() {
       .attr("height", 512*(1-244/1000));
   }
 
-  function shareNetBenefits() {
+  function shareNetBenefits(file) {
     d3.select("#icons").remove();
     d3.select("#plots").select('svg').remove();
 
-    d3.xml("assets/svg/net_share_households_on_benefits.svg").mimeType("image/svg+xml").get(function(error, xml) {
+    d3.xml(file).mimeType("image/svg+xml").get(function(error, xml) {
       if (error) throw error;
       const importedNode = document.importNode(xml.documentElement, true);
       d3.select("#plots").each(function() {
